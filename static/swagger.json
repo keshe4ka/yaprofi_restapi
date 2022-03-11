@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "sean",
+    "version": "1.0.0",
+    "title": "Seans-Python3-Flask-Rest-Boilerplate",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ЯПрофи "
+    }
+  ],
+  "paths": {
+    "/promo": {
+      "get": {
+        "tags": [
+          "Получение краткой информации (без информации об участниках и призах) обо всех промоакциях"
+        ],
+        "summary": "полный список промоакций, без указания участников и призов в формате JSON",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Добавление промоакции с возможностью указания названия (name), описания (description) "
+        ],
+        "summary": "Возвращает идентификатор созданной промоакции,",
+        "requestBody": {
+          "description": "Book Request Post Object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,13 @@ promo = [
         'description': 'string',
         'prizes': prize,
         'participants': participants
+    },
+    {
+        'id': 2,
+        'name': 'string',
+        'description': 'string',
+        'prizes': prize,
+        'participants': participants
     }
 ]
 

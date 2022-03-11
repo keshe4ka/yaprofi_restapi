@@ -1,13 +1,38 @@
 from flask import Flask, jsonify, request
 from data import promo, prize, participant, result
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
+
+### swagger specific ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Seans-Python-Flask-REST-Boilerplate"
+    }
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+
+
+### end swagger specific ###
+
+
+# @app.route('/static/<path:path>')
+# def send_static(path):
+#     return send_from_directory('static', path)
 
 
 @app.route('/promo', methods=['GET', 'POST'])
 def promo_f():
     if request.method == 'GET':
-        return jsonify(promo)
+        answer = []
+        for i in range(len(promo)):
+            new_dict = dict(id=promo[i]['id'], name=promo[i]['name'], description=promo[i]['description'])
+            answer.append(new_dict)
+        return jsonify(answer)
     elif request.method == 'POST':
         new_promo = request.json
         if new_promo['name'] is None:
@@ -105,4 +130,4 @@ def raffle(promo_id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=8080)
