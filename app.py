@@ -15,14 +15,7 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     }
 )
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
-
-
 ### end swagger specific ###
-
-
-# @app.route('/static/<path:path>')
-# def send_static(path):
-#     return send_from_directory('static', path)
 
 
 @app.route('/promo', methods=['GET', 'POST'])
@@ -71,7 +64,6 @@ def promo_id_f(promo_id):
         return "200 OK"
 
 
-# /promo/{id}/participant
 @app.route('/promo/<int:promo_id>/participant', methods=['POST'])
 def add_participant(promo_id):
     new_part = request.json
@@ -81,7 +73,6 @@ def add_participant(promo_id):
     return str(new_id)
 
 
-# /promo/{promoId}/participant/{participantId}
 @app.route('/promo/<int:promo_id>/participant/<int:part_id>', methods=['DELETE'])
 def del_part(promo_id, part_id):
     result_promo = next(x for x in promo if x['id'] == promo_id)
@@ -92,7 +83,6 @@ def del_part(promo_id, part_id):
     return "200 OK"
 
 
-# /promo/{id}/prize
 @app.route('/promo/<int:promo_id>/prize', methods=['POST'])
 def post_prize(promo_id):
     new_prize = request.json
@@ -102,7 +92,6 @@ def post_prize(promo_id):
     return str(new_prize_id)
 
 
-# /promo/{promoId}/prize/{prizeId}
 @app.route('/promo/<int:promo_id>/prize/<int:prize_id>', methods=['DELETE'])
 def del_prize(promo_id, prize_id):
     result_promo = next(x for x in promo if x['id'] == promo_id)
@@ -113,7 +102,6 @@ def del_prize(promo_id, prize_id):
     return "200 OK"
 
 
-# /promo/{id}/raffle
 @app.route('/promo/<int:promo_id>/raffle', methods=['POST'])
 def raffle(promo_id):
     result_promo = next(x for x in promo if x['id'] == promo_id)
